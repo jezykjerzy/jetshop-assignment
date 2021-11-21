@@ -7,12 +7,14 @@ import { CarDetailFormComponent } from './cars/car-detail-form/car-detail-form.c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ToastrModule } from 'ngx-toastr'
 import { FormsModule } from '@angular/forms';
+import { CarsRentalComponent } from './cars-rental/cars-rental.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarsComponent,
-    CarDetailFormComponent
+    CarDetailFormComponent,
+    CarsRentalComponent
   ],
   imports: [
     BrowserModule,

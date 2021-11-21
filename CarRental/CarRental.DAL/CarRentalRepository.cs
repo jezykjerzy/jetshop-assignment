@@ -1,4 +1,5 @@
 ﻿using CarRental.DAL.Model;
+using CarRental.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace CarRental.DAL
         Task<Car> GetCarAsync(int id);
         Task UpdateCar(Car car);
         Task RemoveCarAsync(Car car);
+        Task<List<CarCategory>> GetCategoriesAsync();
     }
 
     public class CarRentalRepository : ICarRentalRepository
@@ -28,18 +30,29 @@ namespace CarRental.DAL
         }
         public async Task AddCarAsync(Car car)
         {
-            _context.Add(car);
+            var category = await _context.Categories.SingleAsync(category => category.Id == car.Category.Id);
+            car.Category = category;
+            _context.Cars.Add(car);
             await _context.SaveChangesAsync();
         }
 
         public async Task<Car> GetCarAsync(int id)
         {
-            return await _context.Cars.FindAsync(id);
+            return await _context.Cars
+                                 .Include(car => car.Category)
+                                 .SingleAsync(car => car.Id == id);
         }
 
         public async Task<List<Car>> GetCarsAsync()
         {
-            return await _context.Cars.ToListAsync();
+            return await _context.Cars
+                                 .Include(car => car.Category)
+                                 .ToListAsync();
+        }
+
+        public Task<List<CarCategory>> GetCategoriesAsync()
+        {
+            return _context.Categories.ToListAsync();
         }
 
         public async Task RemoveCarAsync(Car car)
@@ -48,9 +61,16 @@ namespace CarRental.DAL
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateCar(Car car)
+        public async Task UpdateCar(Car carToUpdate)
         {
-            _context.Entry(car).State = EntityState.Modified;
+            //_context.Entry(car).State = EntityState.Modified;
+            //_context.Entry(car).Entity.Category = car.Category;
+
+            var existingCar = await _context.Cars
+                                 .Include(car => car.Category)
+                                 .SingleAsync(car => car.Id == carToUpdate.Id);
+            existingCar.Category = carToUpdate.Category;
+
 
             try
             {

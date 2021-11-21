@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ɵɵsetComponentScope } from '@angular/core';
 import { Car } from './car.model';
+import { Category } from './category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class CarRentalService {
   
   formData:Car = new Car();
   cars : Car[];
+  categories: Category[];
 
   postCar(){
     return this.http.post(this.baseUrl, this.formData);
@@ -30,6 +32,22 @@ export class CarRentalService {
   refreshCars(){
     this.http.get(this.baseUrl)
              .toPromise()
-             .then(res => this.cars = res as Car[])
+             .then(
+               res => {
+                 this.cars = res as Car[];             
+                },
+                err =>{
+                  console.log(err);}
+                );
+
+    this.http.get(`${this.baseUrl}/categories`)
+             .toPromise()
+             .then(
+               res => {
+                 this.categories = res as Category[];
+               },
+               err =>{
+                console.log(err);}
+               );
   }
 }

@@ -1,6 +1,7 @@
 ﻿
 using CarRental.DAL;
 using CarRental.DAL.Model;
+using CarRental.DAL.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace CarRental.Services
         Task UpdateCarAsync(Car car);
         Task AddCarAsync(Car car);
         Task RemoveCarAsync(Car car);
+        Task<List<CarCategory>> GetCategoriesAsync();
         //IList<CarModel> GetCars();
         //CarModel AddCar(CarModel carModel);
     }
@@ -40,6 +42,11 @@ namespace CarRental.Services
             return await _repository.GetCarsAsync();
         }
 
+        public async Task<List<CarCategory>> GetCategoriesAsync()
+        {
+            return await _repository.GetCategoriesAsync();
+        }
+
         public async Task UpdateCarAsync(Car car)
         {
             await _repository.UpdateCar(car);
@@ -53,6 +60,6 @@ namespace CarRental.Services
         public async Task RemoveCarAsync(Car car)
         {
             await _repository.RemoveCarAsync(car);
-        }
+        }             
     }
 }

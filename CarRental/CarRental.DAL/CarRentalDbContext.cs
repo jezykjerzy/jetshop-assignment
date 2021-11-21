@@ -1,4 +1,5 @@
 ﻿using CarRental.DAL.Model;
+using CarRental.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -12,6 +13,7 @@ namespace CarRental.DAL
 
         }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<CarCategory> Categories { get; set; }
 
         public string DbPath { get; private set; }
 

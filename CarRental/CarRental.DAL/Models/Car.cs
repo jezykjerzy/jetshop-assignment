@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CarRental.DAL.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarRental.DAL.Model
 {
@@ -6,6 +8,11 @@ namespace CarRental.DAL.Model
     {
         [Key]
         public int Id { get; set; }
-        public string Name{ get; set; }
+
+        [Column(TypeName = "nvarchar(100)"), Required]
+        public string Name { get; set; }
+
+        [Required]
+        public CarCategory Category { get; set; }
     }
 }

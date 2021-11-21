@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CarRental.DAL;
 using CarRental.DAL.Model;
 using CarRental.Services;
+using CarRental.DAL.Models;
 
 namespace CarRental.WebAPI.Controllers
 {
@@ -21,6 +22,12 @@ namespace CarRental.WebAPI.Controllers
         public CarsController(ICarRentalService carRentalService)
         {
             _carRentalService = carRentalService;
+        }
+
+        [HttpGet("categories")]
+        public async Task<ActionResult<IEnumerable<CarCategory>>> GetCategories()
+        {
+            return await _carRentalService.GetCategoriesAsync();
         }
 
         // GET: api/Cars
@@ -73,7 +80,7 @@ namespace CarRental.WebAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Car>> PostCar(Car car)
+        public async Task<ActionResult<CarDTO>> PostCar(Car car)
         {
            await _carRentalService.AddCarAsync(car);
 
