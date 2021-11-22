@@ -9,23 +9,6 @@
         <app-car-detail-form></app-car-detail-form>
     </div>
     <div class="col-md-6"> 
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th>Car Name</th>
-                    <th>Category</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let car of service.cars">
-                    <td (click)="populateForm(car)">{{car.name}}</td>
-                    <td (click)="populateForm(car)">{{car.category.name}}</td>
-                    <td>
-                        <i (click)="deleteCar(car.id)" class="far fa-trash-alt fa-lg text-danger"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <app-cars-table></app-cars-table>
     </div>
 </div>

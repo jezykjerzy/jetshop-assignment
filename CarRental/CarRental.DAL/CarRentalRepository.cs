@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 namespace CarRental.DAL
 {
     // TODO Add error handling
+    // TODO Cars controller coudld be extracted
+    // TODO Introduce DTO for Car instead of passing category
     public interface ICarRentalRepository
     {
         Task AddCarAsync(Car car);
@@ -18,6 +20,7 @@ namespace CarRental.DAL
         Task UpdateCar(Car car);
         Task RemoveCarAsync(Car car);
         Task<List<CarCategory>> GetCategoriesAsync();
+        Task<List<Car>> GetAvailableCarsAsync();
     }
 
     public class CarRentalRepository : ICarRentalRepository
@@ -41,6 +44,14 @@ namespace CarRental.DAL
             return await _context.Cars
                                  .Include(car => car.Category)
                                  .SingleAsync(car => car.Id == id);
+        }
+
+        public async Task<List<Car>> GetAvailableCarsAsync()
+        {
+            return await _context.Cars
+                                 .Where(car => car.Available)
+                                 .Include(car => car.Category)
+                                 .ToListAsync();
         }
 
         public async Task<List<Car>> GetCarsAsync()

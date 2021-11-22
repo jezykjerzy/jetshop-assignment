@@ -1,0 +1,23 @@
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>Car Name</th>
+            <th>Category</th>
+            <th>Car Milage (km)</th>
+            <th>Available</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let car of service.cars">
+            <td (click)="populateForm(car)">{{car.name}}</td>
+            <td (click)="populateForm(car)">{{car.category.name}}</td>
+            <td (click)="populateForm(car)">{{car.milageKm}}</td>
+            <td (click)="populateForm(car)">{{car.available}}</td>
+
+            <td>
+            <i (click)="deleteCar(car.id)" class="far fa-trash-alt fa-lg text-danger"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>

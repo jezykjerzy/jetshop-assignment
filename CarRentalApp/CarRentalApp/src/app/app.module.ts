@@ -8,13 +8,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ToastrModule } from 'ngx-toastr'
 import { FormsModule } from '@angular/forms';
 import { CarsRentalComponent } from './cars-rental/cars-rental.component';
+import { CarRentalFormComponent } from './cars-rental/car-rental-form/car-rental-form.component';
+import { CarsTableComponent } from './cars/cars-table/cars-table.component';
+import { AvailableCarsTableComponent } from './cars-rental/available-cars-table/available-cars-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarsComponent,
     CarDetailFormComponent,
-    CarsRentalComponent
+    CarsRentalComponent,
+    CarRentalFormComponent,
+    CarsTableComponent,
+    AvailableCarsTableComponent
   ],
   imports: [
     BrowserModule,

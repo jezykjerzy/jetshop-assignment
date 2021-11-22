@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { CarRentalService } from '../shared/car-rental.service';
+import { CarsService } from '../shared/cars.service';
 import { Car } from '../shared/car.model';
+import { CarRentalService } from '../shared/car-rental.service';
+import { CarRental } from '../shared/car-rental.model';
 
 @Component({
   selector: 'app-cars-rental',
@@ -15,23 +17,10 @@ export class CarsRentalComponent implements OnInit {
     private toastrService: ToastrService) { }
 
   ngOnInit(): void {
-    this.service.refreshCars();
+    this.service.refreshAvailableCars();    
+    // this.populateForm(this.service.availableCars[0]);
   }
-  populateForm(selectedCar: Car): void {
-    this.service.formData = Object.assign({}, selectedCar);
+  populateForm(car: Car): void {
+    this.service.formData.car = Object.assign({}, car);
   }
-
-  deleteCar(carId: number) {
-    this.service.deleteCar(carId).subscribe(
-      res => {
-        this.service.refreshCars();
-        this.toastrService.info("Deleted successfully", "Car administration panel")
-      },
-      err => {
-        console.log(err);
-      }
-
-    )
-  }
-
 }

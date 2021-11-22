@@ -14,5 +14,11 @@ namespace CarRental.DAL.Model
 
         [Required]
         public CarCategory Category { get; set; }
+
+        [Required]
+        public bool Available { get; set; }
+
+        [Required]
+        public long MilageKm { get; set; }
     }
 }

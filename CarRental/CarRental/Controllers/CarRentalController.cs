@@ -1,6 +1,9 @@
-﻿using CarRental.Services;
+﻿using CarRental.DAL.Model;
+using CarRental.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CarRental.Controllers
 {
@@ -15,6 +18,13 @@ namespace CarRental.Controllers
         {
             _logger = logger;
             _carRentalService = carRentalService;
+        }
+
+
+        [HttpGet("available")]
+        public async Task<ActionResult<IEnumerable<Car>>> GetAvailableCars()
+        {
+            return await _carRentalService.GetAvailableCarsAsync();
         }
 
         //[HttpGet]

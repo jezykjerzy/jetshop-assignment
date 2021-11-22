@@ -19,6 +19,7 @@ namespace CarRental.Services
         Task AddCarAsync(Car car);
         Task RemoveCarAsync(Car car);
         Task<List<CarCategory>> GetCategoriesAsync();
+        Task<List<Car>> GetAvailableCarsAsync();
         //IList<CarModel> GetCars();
         //CarModel AddCar(CarModel carModel);
     }
@@ -42,6 +43,11 @@ namespace CarRental.Services
             return await _repository.GetCarsAsync();
         }
 
+        public async Task<List<Car>> GetAvailableCarsAsync()
+        {
+            return await _repository.GetAvailableCarsAsync();
+        }
+
         public async Task<List<CarCategory>> GetCategoriesAsync()
         {
             return await _repository.GetCategoriesAsync();
@@ -60,6 +66,6 @@ namespace CarRental.Services
         public async Task RemoveCarAsync(Car car)
         {
             await _repository.RemoveCarAsync(car);
-        }             
+        }
     }
 }
