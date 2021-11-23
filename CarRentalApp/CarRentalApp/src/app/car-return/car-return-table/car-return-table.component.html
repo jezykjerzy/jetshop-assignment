@@ -1,0 +1,19 @@
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>Car Name</th>
+            <th>Start Date</th>
+            <th>Birthday</th>
+            <th>Rental Id</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rental of service.availableRentals">
+            <td (click)="populateForm(rental)">{{rental.car.name}}</td>
+            <td (click)="populateForm(rental)">{{rental.startDate}}</td>
+            <td (click)="populateForm(rental)">{{rental.customerDateOfBirth}}</td>
+            <td (click)="populateForm(rental)">{{rental.id}}</td>
+        </tr>
+    </tbody>
+</table>

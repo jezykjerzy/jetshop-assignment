@@ -8,6 +8,8 @@ export class Car {
     category: Category = new Category();
     milageKm:number=0;
     available:number;
+    kilometerPrice:number=0;
+
 
     /**
      *

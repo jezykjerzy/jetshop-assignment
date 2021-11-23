@@ -24,6 +24,7 @@ namespace CarRental.DAL
         Task<List<Car>> GetAvailableCarsAsync();
         Task AddCarRentalAsync(CarRentalEntry carRental);
         Task<CarRentalEntry> GetCarRentalAsync(int id);
+        Task<List<CarRentalEntry>> GetAvailableRentalsAsync();
     }
 
     public class CarRentalRepository : ICarRentalRepository
@@ -75,6 +76,16 @@ namespace CarRental.DAL
                                  .Where(car => car.Available)
                                  .Include(car => car.Category)
                                  .ToListAsync();
+   
+        }
+
+        public async Task<List<CarRentalEntry>> GetAvailableRentalsAsync()
+        {
+            return await _context.CarRentals
+                        .Include(carRental => carRental.Car)
+                        .ThenInclude(car => car.Category)
+                        .Where(carRental => false == carRental.Car.Available)
+                        .ToListAsync();
         }
 
         public async Task<List<Car>> GetCarsAsync()

@@ -12,6 +12,9 @@ import { CarRentalFormComponent } from './cars-rental/car-rental-form/car-rental
 import { CarsTableComponent } from './cars/cars-table/cars-table.component';
 import { AvailableCarsTableComponent } from './cars-rental/available-cars-table/available-cars-table.component';
 import { DatePipe } from '@angular/common';
+import { CarReturnComponent } from './car-return/car-return.component';
+import { CarReturnTableComponent } from './car-return/car-return-table/car-return-table.component';
+import { CarReturnFormComponent } from './car-return/car-return-form/car-return-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { DatePipe } from '@angular/common';
     CarsRentalComponent,
     CarRentalFormComponent,
     CarsTableComponent,
-    AvailableCarsTableComponent
+    AvailableCarsTableComponent,
+    CarReturnComponent,
+    CarReturnTableComponent,
+    CarReturnFormComponent
   ],
   imports: [
     BrowserModule,

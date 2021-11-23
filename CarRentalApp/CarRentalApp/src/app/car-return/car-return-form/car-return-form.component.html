@@ -1,0 +1,52 @@
+<!-- TODO Introduce proper form validation -->
+
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="rentalId" [value]="service.formData.id" />
+    <div class="form-group">
+        <label>Car Name</label>
+        <input disabled class="form-control form-control-lg" name="carName"
+            #carName="ngModel" [(ngModel)]="service.formData.carRental.car.name">
+    </div>
+
+    <div class="form-group">
+        <label>CAR MILAGE WHILE RENTING (KM)</label>
+        <input type="number" disabled class="form-control form-control-lg" name="carMilage"
+            #carMilage="ngModel" [(ngModel)]="service.formData.carRental.currentCarMilageKm">
+    </div>
+
+    <div class="form-group">
+        <label>CAR MILAGE WHILE RETURNING (KM)</label>
+        <input class="form-control form-control-lg" name="carMilageWhileReturn"
+            #carMilage="ngModel" [(ngModel)]="service.formData.currentCarMilageKm">
+    </div>
+
+    <div class="form-group">
+        <label>RENTAL START DATE</label>
+        <input disabled class="form-control form-control-lg" name="fromDate"
+        [(ngModel)]="fromDate" type="date"
+       >
+    </div>
+
+    <div class="form-group">
+        <label>RENTAL RETURN DATE</label>
+        <input disabled class="form-control form-control-lg" name="fromDate"
+        [(ngModel)]="returnDate" type="date"
+       >
+    </div>
+
+    <div class="form-group">
+        <label>CUSTOMER DATE OF BIRTH</label>
+        <input disabled class="form-control form-control-lg" name="customerDateOfBirth"
+        [(ngModel)]="birthDayDate" type="date"
+       >
+    </div>
+
+    <div class="form-group">
+        <label>RENTAL ID</label>
+        <input disabled class="form-control form-control-lg" name="name"
+            #name="ngModel" [(ngModel)]="service.formData.carRental.id">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="service.formData.carRental.car.category.name === ''">SUBMIT</button>
+    </div>
+</form>

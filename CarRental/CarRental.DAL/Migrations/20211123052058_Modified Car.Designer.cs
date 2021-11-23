@@ -4,14 +4,16 @@ using CarRental.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRental.DAL.Migrations
 {
     [DbContext(typeof(CarRentalDbContext))]
-    partial class CarRentalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211123052058_Modified Car")]
+    partial class ModifiedCar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,29 +96,6 @@ namespace CarRental.DAL.Migrations
                     b.ToTable("CarRentals");
                 });
 
-            modelBuilder.Entity("CarRental.DAL.Models.CarReturn", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CarRentalId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CurrentCarMilageKm")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("ReturnDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarRentalId");
-
-                    b.ToTable("CarReturns");
-                });
-
             modelBuilder.Entity("CarRental.DAL.Model.Car", b =>
                 {
                     b.HasOne("CarRental.DAL.Models.CarCategory", "Category")
@@ -131,15 +110,6 @@ namespace CarRental.DAL.Migrations
                     b.HasOne("CarRental.DAL.Model.Car", "Car")
                         .WithMany()
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CarRental.DAL.Models.CarReturn", b =>
-                {
-                    b.HasOne("CarRental.DAL.Models.CarRentalEntry", "CarRental")
-                        .WithMany()
-                        .HasForeignKey("CarRentalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

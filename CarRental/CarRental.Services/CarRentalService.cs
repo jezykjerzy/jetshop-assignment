@@ -22,7 +22,7 @@ namespace CarRental.Services
         Task<List<Car>> GetAvailableCarsAsync();
         Task<CarRentalEntry> GetCarRentalAsync(int id);
         Task AddCarRentalAsync(CarRentalEntry carRental);
-        Task<RentalPayment> ComputePayment(CarReturn carReturn);
+        Task<List<CarRentalEntry>> GetAvailableRentalsAsync();
     }
 
     public class CarRentalService : ICarRentalService
@@ -54,6 +54,11 @@ namespace CarRental.Services
             return await _repository.GetAvailableCarsAsync();
         }
 
+        public async Task<List<CarRentalEntry>> GetAvailableRentalsAsync()
+        {
+            return await _repository.GetAvailableRentalsAsync();
+        }
+
         public async Task<List<CarCategory>> GetCategoriesAsync()
         {
             return await _repository.GetCategoriesAsync();
@@ -78,11 +83,6 @@ namespace CarRental.Services
         {
             await _repository.RemoveCarAsync(car);
         }
-
-        public Task<RentalPayment> ComputePayment(CarReturn carReturn)
-        {
-            var category = 
-            return await _paymentService.Compute(carReturn);
-        }
+        
     }
 }

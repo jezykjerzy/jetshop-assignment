@@ -15,7 +15,9 @@ namespace CarRental.DAL
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarCategory> Categories { get; set; }
         public DbSet<CarRentalEntry> CarRentals { get; set; }
+        public DbSet<CarReturn> CarReturns { get; set; }
         public string DbPath { get; private set; }
+
 
 
         // The following configures EF to create a Sqlite database file in the

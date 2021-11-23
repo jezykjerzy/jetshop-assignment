@@ -40,11 +40,6 @@ export class CarRentalFormComponent implements OnInit {
     this.birthDayDate =  this.datePipe.transform(new Date(), 'yyyy-MM-dd');  }
 
   onSubmit(form:NgForm){
-    // if(carId == 0){
-    //   this.addCar(form);
-    // }else{
-    //   this.updateCar(form);
-    // }
     this.addRental(form);
   }
 

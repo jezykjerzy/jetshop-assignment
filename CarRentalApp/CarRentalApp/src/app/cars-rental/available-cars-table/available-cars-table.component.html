@@ -11,7 +11,6 @@
         <tr *ngFor="let car of service.availableCars">
             <td (click)="populateForm(car)">{{car.name}}</td>
             <td (click)="populateForm(car)">{{car.category.name}}</td>
-            <td (click)="populateForm(car)">{{car.milageKm}}</td>
         </tr>
     </tbody>
 </table>
