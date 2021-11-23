@@ -11,6 +11,7 @@ import { CarsRentalComponent } from './cars-rental/cars-rental.component';
 import { CarRentalFormComponent } from './cars-rental/car-rental-form/car-rental-form.component';
 import { CarsTableComponent } from './cars/cars-table/cars-table.component';
 import { AvailableCarsTableComponent } from './cars-rental/available-cars-table/available-cars-table.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { AvailableCarsTableComponent } from './cars-rental/available-cars-table/
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,7 +14,7 @@ namespace CarRental.DAL
         }
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarCategory> Categories { get; set; }
-
+        public DbSet<CarRentalEntry> CarRentals { get; set; }
         public string DbPath { get; private set; }
 
 

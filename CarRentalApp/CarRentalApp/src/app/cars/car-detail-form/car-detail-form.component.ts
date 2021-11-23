@@ -19,8 +19,6 @@ export class CarDetailFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  carCategories: Category[];
-
   onSubmit(form:NgForm){
     let carId = this.service.formData.id;
     if(carId == 0){

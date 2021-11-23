@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CarRental.Services
 {
     // TODO Think about splitting into CarService and CarRentalService
-    // TODO Could be introduced CarModel in order not to expose all properties and converter like Automapper
+    // TODO Could be introduced DTO in order not to expose all properties and converter like Automapper
     public interface ICarRentalService
     {
         //Task<CarModel> AddCarAsync(CarModel carModel);
@@ -20,8 +20,9 @@ namespace CarRental.Services
         Task RemoveCarAsync(Car car);
         Task<List<CarCategory>> GetCategoriesAsync();
         Task<List<Car>> GetAvailableCarsAsync();
-        //IList<CarModel> GetCars();
-        //CarModel AddCar(CarModel carModel);
+        Task<CarRentalEntry> GetCarRentalAsync(int id);
+        Task AddCarRentalAsync(CarRentalEntry carRental);
+        Task<RentalPayment> ComputePayment(CarReturn carReturn);
     }
 
     public class CarRentalService : ICarRentalService
@@ -36,6 +37,11 @@ namespace CarRental.Services
         public async Task<Car> GetCarAsync(int id)
         {
             return await _repository.GetCarAsync(id);
+        }
+
+        public async Task<CarRentalEntry> GetCarRentalAsync(int id)
+        {
+            return await _repository.GetCarRentalAsync(id);
         }
 
         public async Task<List<Car>> GetCarsAsync()
@@ -58,6 +64,11 @@ namespace CarRental.Services
             await _repository.UpdateCar(car);
         }
 
+        public async Task AddCarRentalAsync(CarRentalEntry carRental)
+        {
+            await _repository.AddCarRentalAsync(carRental);
+        }
+
         public async Task AddCarAsync(Car car)
         {
             await _repository.AddCarAsync(car);
@@ -66,6 +77,12 @@ namespace CarRental.Services
         public async Task RemoveCarAsync(Car car)
         {
             await _repository.RemoveCarAsync(car);
+        }
+
+        public Task<RentalPayment> ComputePayment(CarReturn carReturn)
+        {
+            var category = 
+            return await _paymentService.Compute(carReturn);
         }
     }
 }

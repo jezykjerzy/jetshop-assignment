@@ -11,7 +11,8 @@ namespace CarRental.DAL
 {
     // TODO Add error handling
     // TODO Cars controller coudld be extracted
-    // TODO Introduce DTO for Car instead of passing category
+    // TODO Introduce DTO for Car instead of passing Category object
+    // TODO 
     public interface ICarRentalRepository
     {
         Task AddCarAsync(Car car);
@@ -21,6 +22,8 @@ namespace CarRental.DAL
         Task RemoveCarAsync(Car car);
         Task<List<CarCategory>> GetCategoriesAsync();
         Task<List<Car>> GetAvailableCarsAsync();
+        Task AddCarRentalAsync(CarRentalEntry carRental);
+        Task<CarRentalEntry> GetCarRentalAsync(int id);
     }
 
     public class CarRentalRepository : ICarRentalRepository
@@ -31,6 +34,8 @@ namespace CarRental.DAL
         {
             _context = context;
         }
+
+        //TODO Add validation for existing cars
         public async Task AddCarAsync(Car car)
         {
             var category = await _context.Categories.SingleAsync(category => category.Id == car.Category.Id);
@@ -39,11 +44,29 @@ namespace CarRental.DAL
             await _context.SaveChangesAsync();
         }
 
+
+        public async Task AddCarRentalAsync(CarRentalEntry carRental)
+        {
+            var existingCar = await _context.Cars.SingleAsync(car => car.Id == carRental.Car.Id);
+            existingCar.Available = false;
+            carRental.Car = existingCar;
+            _context.CarRentals.Add(carRental);
+            await _context.SaveChangesAsync();
+            
+        }
+
         public async Task<Car> GetCarAsync(int id)
         {
             return await _context.Cars
                                  .Include(car => car.Category)
                                  .SingleAsync(car => car.Id == id);
+        }
+
+        public async Task<CarRentalEntry> GetCarRentalAsync(int id)
+        {
+           return await _context.CarRentals
+                          .Include(carRental => carRental.Car)
+                          .SingleAsync(carRental => carRental.Id == id);
         }
 
         public async Task<List<Car>> GetAvailableCarsAsync()
@@ -81,6 +104,7 @@ namespace CarRental.DAL
                                  .Include(car => car.Category)
                                  .SingleAsync(car => car.Id == carToUpdate.Id);
             existingCar.Category = carToUpdate.Category;
+            existingCar.Name = carToUpdate.Name;
 
 
             try
