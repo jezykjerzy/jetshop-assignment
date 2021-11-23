@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.WebAPI", "CarRental\CarRental.WebAPI.csproj", "{D73B77A1-F23B-4A17-A4CD-50A7515A6CBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRental.WebAPI", "CarRental\CarRental.WebAPI.csproj", "{D73B77A1-F23B-4A17-A4CD-50A7515A6CBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.DAL", "CarRental.DAL\CarRental.DAL.csproj", "{C9B650AF-4DEF-4C6A-9BEA-DDB08224B91C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRental.Entities", "CarRental.DAL\CarRental.Entities.csproj", "{C9B650AF-4DEF-4C6A-9BEA-DDB08224B91C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.Services", "CarRental.Services\CarRental.Services.csproj", "{6D6E4F90-C7FD-4156-9DBC-E8E2DF7C0195}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRental.Services", "CarRental.Services\CarRental.Services.csproj", "{6D6E4F90-C7FD-4156-9DBC-E8E2DF7C0195}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

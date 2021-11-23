@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace CarRental.Services
 {
-    // TODO Think about splitting into CarService and CarRentalService
-    // TODO Could be introduced DTO in order not to expose all properties and converter like Automapper
+    // TODO Split into CarService and CarRentalService
+    // TODO Should be introduced DTO in order not to expose all properties and converter like Automapper
     public interface ICarRentalService
     {
-        //Task<CarModel> AddCarAsync(CarModel carModel);
         Task<List<Car>> GetCarsAsync();
         Task<Car> GetCarAsync(int id);
         Task UpdateCarAsync(Car car);
@@ -23,7 +22,6 @@ namespace CarRental.Services
         Task<CarRentalEntry> GetCarRentalAsync(int id);
         Task AddCarRentalAsync(CarRentalEntry carRental);
         Task<List<CarRentalEntry>> GetAvailableRentalsAsync();
-        Task AddRentalPayment(RentalPayment payment);
         Task AddCarReturnAsync(CarReturn carReturn);
     }
 
@@ -86,13 +84,9 @@ namespace CarRental.Services
             await _repository.RemoveCarAsync(car);
         }
 
-        public async Task AddRentalPayment(RentalPayment payment)
-        {
-            //throw new System.NotImplementedException();
-        }
-
         public async Task AddCarReturnAsync(CarReturn carReturn)
         {
+
             await _repository.AddCarReturnAsync(carReturn);
         }
     }

@@ -6,7 +6,7 @@ export class Car {
     id:number=0;
     name:string='';
     category: Category = new Category();
-    milageKm:number=0;
+    totalMilageKm:number=0;
     available:number;
     kilometerPrice:number=0;
 

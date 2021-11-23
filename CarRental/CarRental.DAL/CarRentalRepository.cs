@@ -11,8 +11,7 @@ namespace CarRental.DAL
 {
     // TODO Add error handling
     // TODO Cars controller coudld be extracted
-    // TODO Introduce DTO for Car instead of passing Category object
-    // TODO 
+    // TODO Introduce DTO with Automapper for Car instead of passing Category object
     public interface ICarRentalRepository
     {
         Task AddCarAsync(Car car);
@@ -42,6 +41,7 @@ namespace CarRental.DAL
         {
             var category = await _context.Categories.SingleAsync(category => category.Id == car.Category.Id);
             car.Category = category;
+            car.Available = true;
             _context.Cars.Add(car);
             await _context.SaveChangesAsync();
         }
@@ -60,12 +60,14 @@ namespace CarRental.DAL
         public async Task AddCarReturnAsync(CarReturn carReturn)
         {
             var existingCarRentalEntry = await _context.CarRentals
-                                                        .Include(carRental => carRental.Car)
-                                                        .SingleAsync(carRental => carRental.Id == carReturn.CarRental.Id);
+                                                       .Include(carRental => carRental.Car)
+                                                       .SingleAsync(carRental => carRental.Id == carReturn.CarRental.Id)
+;
 
             existingCarRentalEntry.Car.Available = true;
             carReturn.CarRental = existingCarRentalEntry;
             _context.CarReturns.Add(carReturn);
+            
             await _context.SaveChangesAsync();
         }
 
@@ -129,6 +131,7 @@ namespace CarRental.DAL
                                  .SingleAsync(car => car.Id == carToUpdate.Id);
             existingCar.Category = carToUpdate.Category;
             existingCar.Name = carToUpdate.Name;
+            // TODO update whole Car
 
 
             try

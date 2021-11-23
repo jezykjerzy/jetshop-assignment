@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CarRental.DAL\CarRental.DAL.csproj" />
+    <ProjectReference Include="..\CarRental.DAL\CarRental.Entities.csproj" />
   </ItemGroup>
 
 </Project>

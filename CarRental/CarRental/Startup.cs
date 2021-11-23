@@ -21,7 +21,7 @@ namespace CarRental
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // TODO could be done in better way? Installer or smthg
+            // TODO DbContext and CarRentalRepository should have their own installer
             services.AddDbContext<CarRentalDbContext>();
             services.AddTransient<ICarRentalRepository, CarRentalRepository>();
             services.AddTransient<IPaymentService, PaymentService>();
