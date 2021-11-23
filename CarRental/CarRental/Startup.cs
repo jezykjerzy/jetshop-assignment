@@ -1,5 +1,6 @@
 using CarRental.DAL;
 using CarRental.Services;
+using CarRental.Services.Payments;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,7 @@ namespace CarRental
             // TODO could be done in better way? Installer or smthg
             services.AddDbContext<CarRentalDbContext>();
             services.AddTransient<ICarRentalRepository, CarRentalRepository>();
+            services.AddTransient<IPaymentService, PaymentService>();
             services.AddTransient<ICarRentalService, CarRentalService>();
             services.AddControllers();
 

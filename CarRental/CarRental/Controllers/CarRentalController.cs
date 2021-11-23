@@ -9,12 +9,6 @@ using System.Threading.Tasks;
 
 namespace CarRental.Controllers
 {
-    public enum Category
-    {
-        Compact,
-        Premium,
-        Minivan
-    }
     //TODO Add validation for inputs
     [ApiController]
     [Route("api/[controller]")]
@@ -22,11 +16,14 @@ namespace CarRental.Controllers
     {
         private readonly ILogger<CarRentalController> _logger;
         private readonly ICarRentalService _carRentalService;
+        private readonly IPaymentService _paymentService;
 
-        public CarRentalController(ILogger<CarRentalController> logger, ICarRentalService carRentalService)
+        public CarRentalController(ILogger<CarRentalController> logger, ICarRentalService carRentalService, 
+                                   IPaymentService paymentService)
         {
             _logger = logger;
             _carRentalService = carRentalService;
+            _paymentService = paymentService;
         }
 
 
@@ -71,38 +68,18 @@ namespace CarRental.Controllers
 
 
         [HttpPost("return")]
-        public RentalPayment PostCarReturnAync(CarReturn carReturn)
+        public async Task<RentalPayment> PostCarReturnAync(CarReturn carReturn)
         {
             // TODO check if customer did not exceed return date;
             // TODO computing payment and saving car return should be done in transaction
-            var paymentInfo = new CompactPaymentInfo
-            {
-                CarReturn = carReturn,
-                BaseDayRental = 50.0f
-
-            };
-            //var payment = _paymentService.ComputePayment(carReturn);
-
-            var computors = new IPaymentComputor[]
-            {
-                new CompactCategoryComputor(),
-
-            };
-            var paymentStrategy = new PaymentStrategy(computors);
-            var payment = paymentStrategy.ComputePayment(paymentInfo);
-             
-            //await _carRentalService.AddCarReturnAsync(carReturn);
+            
+            var payment = _paymentService.ComputePayment(carReturn);
+            await _carRentalService.AddCarReturnAsync(carReturn);
             //await _carRentalService.AddRentalPayment(payment);
 
             return payment;
         }
-
-
-        //[HttpGet]
-        //public IActionResult Get()
-        //{
-        //    return Ok(_carRentalService.GetCars());
-        //}
-
     }
+
+   
 }

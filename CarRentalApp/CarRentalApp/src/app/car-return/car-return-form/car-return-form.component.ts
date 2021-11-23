@@ -58,7 +58,7 @@ export class CarReturnFormComponent implements OnInit {
   }
 
   resolveDates() {
-    this.service.formData.returnDate = new Date(this.fromDate);
+    this.service.formData.returnDate = new Date(this.returnDate);
   }
 
   resetForm(form:NgForm){

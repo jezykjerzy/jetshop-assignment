@@ -25,6 +25,7 @@ namespace CarRental.DAL
         Task AddCarRentalAsync(CarRentalEntry carRental);
         Task<CarRentalEntry> GetCarRentalAsync(int id);
         Task<List<CarRentalEntry>> GetAvailableRentalsAsync();
+        Task AddCarReturnAsync(CarReturn carReturn);
     }
 
     public class CarRentalRepository : ICarRentalRepository
@@ -54,6 +55,18 @@ namespace CarRental.DAL
             _context.CarRentals.Add(carRental);
             await _context.SaveChangesAsync();
             
+        }
+
+        public async Task AddCarReturnAsync(CarReturn carReturn)
+        {
+            var existingCarRentalEntry = await _context.CarRentals
+                                                        .Include(carRental => carRental.Car)
+                                                        .SingleAsync(carRental => carRental.Id == carReturn.CarRental.Id);
+
+            existingCarRentalEntry.Car.Available = true;
+            carReturn.CarRental = existingCarRentalEntry;
+            _context.CarReturns.Add(carReturn);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Car> GetCarAsync(int id)
@@ -127,5 +140,7 @@ namespace CarRental.DAL
                 throw;
             }
         }
+
+       
     }
 }

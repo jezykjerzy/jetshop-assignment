@@ -23,6 +23,8 @@ namespace CarRental.Services
         Task<CarRentalEntry> GetCarRentalAsync(int id);
         Task AddCarRentalAsync(CarRentalEntry carRental);
         Task<List<CarRentalEntry>> GetAvailableRentalsAsync();
+        Task AddRentalPayment(RentalPayment payment);
+        Task AddCarReturnAsync(CarReturn carReturn);
     }
 
     public class CarRentalService : ICarRentalService
@@ -83,6 +85,15 @@ namespace CarRental.Services
         {
             await _repository.RemoveCarAsync(car);
         }
-        
+
+        public async Task AddRentalPayment(RentalPayment payment)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public async Task AddCarReturnAsync(CarReturn carReturn)
+        {
+            await _repository.AddCarReturnAsync(carReturn);
+        }
     }
 }
