@@ -2,19 +2,24 @@
     <input type="hidden" name="paymentDetailId" [value]="service.formData.id" />
     <div class="form-group">
         <label>CAR NAME</label>
-        <input class="form-control form-control-lg" placeholder="Full Name" name="name"
-            #name="ngModel" [(ngModel)]="service.formData.name"
+        <input class="form-control form-control-lg" placeholder="Full Name" 
+            name="name" #name="ngModel" [(ngModel)]="service.formData.name"
             required [class.invalid]="name.invalid && name.touched">
     </div>
 
     <div class="form-group">
         <label>CAR CATEGORY</label>
 
-        <select [(ngModel)] = service.formData.category class="form-control form-control-lg" name="category">
-            <option *ngFor="let category of service.categories" [ngValue]="category" required>
+        <select class="form-control form-control-lg" 
+            name="carCategory" #carCategory="ngModel" [(ngModel)] ="service.formData.category"        
+            required [class.invalid]="carCategory.invalid && carCategory.touched" >
+            <option *ngFor="let category of service.categories" [ngValue]="category" >
                 {{category.name}}
             </option>
         </select>
+        <div *ngIf="carCategory.invalid && carCategory.dirty" class="error">
+            Profile required.
+        </div>
     </div>
     <div class="form-group">
         <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>

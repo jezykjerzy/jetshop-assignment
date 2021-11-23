@@ -1,35 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CarRental } from './car-rental.model';
-import { Car } from './car.model';
+import { CarReturn } from './car-return.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CarRentalService {
+export class CarReturnService {
 
-  constructor(private http : HttpClient){} 
+  constructor(private http : HttpClient) { }
   readonly baseUrl = "https://localhost:44394/api/carrental";
 
-  formData:CarRental = new CarRental();
-  availableCars : Car[];
+  
+  formData:CarReturn = new CarReturn();
+  availableRentals : CarRental[];
 
-  postRental(){
-    let url = `${this.baseUrl}/rental`;
-    return this.http.post(url, this.formData);
+  postReturn(){
+    return this.http.post(`${this.baseUrl}/return`, this.formData);
   }
 
-  
-  refreshAvailableCars(){
-    let url = `${this.baseUrl}/availablecars`;
+  refreshAvailableRentals(){
+    let url = `${this.baseUrl}/availablerentals`;
     this.http.get(url)
              .toPromise()
              .then(
                res => {
-                 this.availableCars = res as Car[];             
+                 this.availableRentals = res as CarRental[];             
                 },
                 err =>{
                   console.log(err);}
                 );
   }
+
 }

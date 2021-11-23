@@ -80,7 +80,7 @@ namespace CarRental.WebAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<CarDTO>> PostCar(Car car)
+        public async Task<ActionResult<Car>> PostCar(Car car)
         {
            await _carRentalService.AddCarAsync(car);
 

@@ -17,7 +17,7 @@ export class CarsTableComponent implements OnInit {
   }
   
   populateForm(selectedCar:Car): void{
-    this.service.formData =Object.assign({},selectedCar);
+    this.service.formData = Object.assign({},selectedCar);
   }
 
   deleteCar(carId:number){
